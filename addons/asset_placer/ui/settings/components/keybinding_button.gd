@@ -24,12 +24,14 @@ var _modifier_keys: Dictionary[Key, KeyModifierMask] = {
 
 var _state := State.Idle:
 	set(state):
+		set_process(false)
 		_state = state
 		match _state:
 			State.Idle:
 				on_idle()
 			State.Bind:
 				on_bind()
+				set_process(true)
 
 
 func on_idle():

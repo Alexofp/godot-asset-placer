@@ -9,6 +9,7 @@ var _thumbnail_identifier := ""
 
 
 func _process(_delta):
+	set_process(false)
 	if not is_part_of_edited_scene() and is_instance_valid(_resource) and _resource.has_resource():
 		var new_time_modified = FileAccess.get_modified_time(_resource.get_path())
 		if new_time_modified != last_time_modified:

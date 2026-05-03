@@ -8,6 +8,7 @@ signal right_clicked(asset: AssetResource)
 var resource: AssetResource
 var settings_repo = AssetPlacerSettingsRepository.instance
 var default_size: Vector2
+const DEFAULT_WIDTH := 150.0
 
 @onready var button = %Button
 @onready var label = %Label
@@ -29,7 +30,9 @@ func set_asset(asset: AssetResource):
 
 
 func set_settings(settings: AssetPlacerSettings):
-	custom_minimum_size = default_size * settings.ui_scale
+	custom_minimum_size.x = DEFAULT_WIDTH * settings.ui_scale
+	custom_minimum_size.y = 0.0
+	#custom_minimum_size = default_size * settings.ui_scale
 
 
 func select_not_signal(selected: bool):

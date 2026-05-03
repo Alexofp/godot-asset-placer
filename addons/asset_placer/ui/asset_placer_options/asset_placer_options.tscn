@@ -24,13 +24,6 @@ script = ExtResource("2_o45xf")
 icon_name = &"Group"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
-[sub_resource type="Texture2D" id="Texture2D_h1wu1"]
-resource_local_to_scene = false
-resource_name = ""
-script = ExtResource("2_o45xf")
-icon_name = &"Info"
-metadata/_custom_type_script = "uid://dmicn3kmr620j"
-
 [sub_resource type="Texture2D" id="Texture2D_br0rc"]
 resource_local_to_scene = false
 resource_name = ""
@@ -81,15 +74,22 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 16
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
 theme_override_constants/margin_bottom = 12
 script = ExtResource("1_7uy5w")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=271010355]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="VBoxContainer" unique_id=1381235482]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer" unique_id=1785220177]
+layout_mode = 2
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_bottom = -10
+
+[node name="Label" type="Label" parent="VBoxContainer/MarginContainer" unique_id=1381235482]
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Options"
@@ -119,23 +119,16 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Resolve Parent from Selected Nodes"
 
-[node name="AutoGroupContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=357839780]
-layout_mode = 2
-
-[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="VBoxContainer/AutoGroupContainer" unique_id=1107220742]
+[node name="GroupAutomaticallyCheckBox" type="CheckBox" parent="VBoxContainer" unique_id=1107220742]
 unique_name_in_owner = true
-layout_mode = 2
-button_pressed = true
-text = "Auto-Group by Collections"
-icon = SubResource("Texture2D_h8tp4")
-
-[node name="InfoButton" type="Button" parent="VBoxContainer/AutoGroupContainer" unique_id=2050820169]
+custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 tooltip_text = "Automatically groups placed Assets based on their primary collection.
 New Parent Node will be created automatically and will have the same name as primary Collection.
 Assets without Primary collection will be placed under currently selected root node"
-icon = SubResource("Texture2D_h1wu1")
-flat = true
+button_pressed = true
+text = "Auto-Group by Collections"
+icon = SubResource("Texture2D_h8tp4")
 
 [node name="PlacementMode" type="VBoxContainer" parent="VBoxContainer" unique_id=446228019]
 layout_mode = 2
@@ -203,10 +196,12 @@ layout_mode = 2
 [node name="RandomAssetCheckBox" type="CheckBox" parent="VBoxContainer/VBoxContainer" unique_id=876857783]
 unique_name_in_owner = true
 layout_mode = 2
+tooltip_text = "Experimental: This option will pick item from the currently visible assets  after each placement"
 text = "Enable Random Asset Placement"
 icon = SubResource("Texture2D_br0rc")
 
 [node name="Label" type="Label" parent="VBoxContainer/VBoxContainer" unique_id=260316837]
+visible = false
 custom_minimum_size = Vector2(315, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -258,10 +253,10 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/FoldableContainer" unique_id=1484071200]
 layout_mode = 2
+theme_override_constants/separation = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer" unique_id=1362911331]
 layout_mode = 2
-theme_override_constants/margin_top = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer" unique_id=415955852]
 layout_mode = 2
@@ -303,7 +298,6 @@ metadata/_custom_type_script = "uid://btqju8qjrlawq"
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer" unique_id=2099829487]
 layout_mode = 2
-theme_override_constants/margin_top = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/FoldableContainer/VBoxContainer/MarginContainer2" unique_id=463120851]
 layout_mode = 2

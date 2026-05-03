@@ -5,6 +5,10 @@
 [ext_resource type="Script" uid="uid://dmicn3kmr620j" path="res://addons/asset_placer/utils/system_icon.gd" id="3_gvdec"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qx6qk"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5cqey"]
 
@@ -105,8 +109,10 @@ layout_mode = 2
 [node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer" unique_id=177413274]
 clip_contents = true
 layout_mode = 2
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_bottom = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContent/PanelContainer/MarginContainer" unique_id=447420490]
 clip_contents = false
@@ -134,10 +140,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qx6qk")
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer" unique_id=296305669]
 layout_mode = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer" unique_id=1163473389]
 layout_mode = 2
@@ -145,25 +148,23 @@ alignment = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=659313167]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/margin_left = 6
-theme_override_constants/margin_top = -16
+theme_override_constants/margin_top = -10
+theme_override_constants/margin_bottom = -16
 
 [node name="AssetsLabel" type="Label" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/MarginContainer" unique_id=1180368063]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 36
 text = "Assets"
-text_overrun_behavior = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=439730441]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 8
 
-[node name="HBoxContainerTop" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=263426647]
+[node name="HBoxContainerTop" type="HFlowContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=604224242]
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
-theme_override_constants/separation = 8
 alignment = 2
 
 [node name="HBoxContainerBot" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=448990933]
@@ -244,11 +245,11 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=170963825]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop" unique_id=170963825]
 layout_mode = 2
 size_flags_horizontal = 8
 
-[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1736028897]
+[node name="AddFolderButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainer" unique_id=1736028897]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(34, 34)
 layout_mode = 2
@@ -257,18 +258,19 @@ tooltip_text = "Add Assets from Folder"
 icon = SubResource("Texture2D_5cqey")
 icon_alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1663076877]
+[node name="CenterContainer" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainer" unique_id=1663076877]
 layout_mode = 2
 
-[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer" unique_id=389049027]
+[node name="ReloadButton" type="Button" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainer/CenterContainer" unique_id=389049027]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 34)
 layout_mode = 2
 size_flags_vertical = 4
-text = "Sync Assets"
+tooltip_text = "Sync Assets"
+text = "Sync"
 icon = SubResource("Texture2D_qx6qk")
 
-[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/CenterContainer" unique_id=578510117]
+[node name="ProgressBar" type="ProgressBar" parent="MainContent/PanelContainer2/VBoxContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainerTop/HBoxContainer/CenterContainer" unique_id=578510117]
 unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(100, 10)
@@ -293,6 +295,8 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 
 [node name="EmptyCollectionContent" type="CenterContainer" parent="MainContent/PanelContainer2/VBoxContainer" unique_id=2105840377]
 unique_name_in_owner = true

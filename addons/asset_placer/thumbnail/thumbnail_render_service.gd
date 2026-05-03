@@ -112,7 +112,7 @@ func _create_preview_node(resource: Resource) -> Node3D:
 
 func _frame_camera(bounds: AABB):
 	var center: Vector3 = bounds.position + (bounds.size * 0.5)
-	var radius: float = max(bounds.size.length() * 0.5, 0.25)
+	var radius: float = max(bounds.size.length() * 0.4, 0.25)
 	var offset: Vector3 = Vector3(1.0, 0.8, 1.0).normalized() * radius * 2.8
 	_camera.global_position = center + offset
 	_camera.look_at(center, Vector3.UP)
