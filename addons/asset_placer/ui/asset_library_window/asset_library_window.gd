@@ -89,6 +89,7 @@ func show_asset_menu(asset: AssetResource, _control: Control):
 	var mouse_pos = DisplayServer.mouse_get_position()
 	options_menu.add_icon_item(EditorIconTexture2D.new("Groups"), "Manage collections")
 	options_menu.add_icon_item(EditorIconTexture2D.new("File"), "Open")
+	options_menu.add_icon_item(EditorIconTexture2D.new("Texture2D"), "Regenerate icon")
 	options_menu.add_icon_item(EditorIconTexture2D.new("Remove"), "Remove")
 	options_menu.index_pressed.connect(
 		func(index):
@@ -99,6 +100,13 @@ func show_asset_menu(asset: AssetResource, _control: Control):
 					EditorInterface.open_scene_from_path(asset.get_path())
 					EditorInterface.set_main_screen_editor("3D")
 				2:
+					var coordinator := ThumbnailGenerationCoordinator.instance
+					if not is_instance_valid(coordinator):
+						return false
+					if coordinator.is_running():
+						return false
+					return coordinator.start_regeneration([asset], false)
+				3:
 					if placer_presenter._selected_asset == asset:
 						placer_presenter.clear_selection()
 					presenter.delete_asset(asset)
