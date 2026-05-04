@@ -10,6 +10,7 @@ var _viewport: SubViewport
 var _preview_root: Node3D
 var _camera: Camera3D
 var _light: DirectionalLight3D
+var _env: WorldEnvironment
 
 
 func _init():
@@ -23,6 +24,7 @@ func dispose():
 	_preview_root = null
 	_camera = null
 	_light = null
+	_env = null
 
 
 func render_asset(asset: AssetResource) -> Dictionary:
@@ -86,6 +88,10 @@ func _ensure_viewport() -> bool:
 	_light = DirectionalLight3D.new()
 	_light.rotation_degrees = Vector3(-35.0, -30.0, 0.0)
 	_preview_root.add_child(_light)
+
+	_env = WorldEnvironment.new()
+	_env.environment = preload("res://addons/asset_placer/thumbnail/thumbnail_world_environment.tres")
+	_preview_root.add_child(_env)
 
 	tree.root.add_child(_viewport)
 	return true
