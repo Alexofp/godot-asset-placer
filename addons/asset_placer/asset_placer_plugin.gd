@@ -315,7 +315,11 @@ func _forward_3d_gui_input(viewport_camera, event):
 		var axis := _presenter.preview_transform_axis
 		if _asset_placer.transform_preview(_presenter.transform_mode, axis, -1):
 			return _handled()
-
+	elif current_settings.binding_positive_transform.should_handle(event):
+		return _handled()
+	elif current_settings.binding_negative_transform.should_handle(event):
+		return _handled()
+	
 	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisX].is_pressed(event):
 		_presenter.toggle_axis(Vector3.RIGHT)
 		return _handled()

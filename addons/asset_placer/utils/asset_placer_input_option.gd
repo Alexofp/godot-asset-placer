@@ -7,6 +7,8 @@ var modifiers: KeyModifierMask
 func is_pressed(_event: InputEvent) -> bool:
 	return false
 
+func should_handle(_event: InputEvent) -> bool:
+	return false
 
 func get_display_name() -> String:
 	return ""
@@ -81,6 +83,9 @@ class MousePress:
 		)
 
 	func is_pressed(event: InputEvent) -> bool:
+		return _is_pressed(event, true)
+		
+	func _is_pressed(event: InputEvent, _onlyPressed:bool) -> bool:
 		if event is InputEventMouseButton:
 			var event_modifiers: KeyModifierMask = 0
 			if Input.is_key_pressed(Key.KEY_SHIFT):
@@ -92,10 +97,13 @@ class MousePress:
 			if Input.is_key_pressed(Key.KEY_META):
 				event_modifiers |= KeyModifierMask.KEY_MASK_META
 
-			return event.button_index == mouse_index and event_modifiers == modifiers and event.is_pressed()
+			return event.button_index == mouse_index and event_modifiers == modifiers and (!_onlyPressed || event.is_pressed())
 		else:
 			return false
-
+	
+	func should_handle(event: InputEvent) -> bool:
+		return _is_pressed(event, false)
+	
 	func get_display_name() -> String:
 		var button_name: String
 		match mouse_index:
