@@ -92,7 +92,7 @@ class MousePress:
 			if Input.is_key_pressed(Key.KEY_META):
 				event_modifiers |= KeyModifierMask.KEY_MASK_META
 
-			return event.button_index == mouse_index and event_modifiers == modifiers
+			return event.button_index == mouse_index and event_modifiers == modifiers and event.is_pressed()
 		else:
 			return false
 
