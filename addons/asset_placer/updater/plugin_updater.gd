@@ -26,6 +26,8 @@ func _init(local_config_path: String, remote_config_path: String):
 func check_for_updates(
 	channel: AssetPlacerSettings.UpdateChannel = AssetPlacerSettings.UpdateChannel.Stable
 ):
+	if(!AssetPlacerSettingsRepository.instance.get_settings().updater_enabled):
+		return
 	_latest_update = await _get_latest_update(channel)
 	if !_latest_update:
 		return

@@ -45,6 +45,7 @@ const _BINDING_KEYS := {
 const KEY_GENERAL_PREVIEW_MATERIAL: String = "general/preview_material"
 const KEY_GENERAL_PLANE_MATERIAL: String = "general/plane_material"
 const KEY_ASSET_LIBRARY_PATH: String = "general/asset_library_path"
+const KEY_UPDATER_ENABLED: String = "general/updater_enabled"
 
 static var instance: AssetPlacerSettingsRepository
 
@@ -67,10 +68,12 @@ func initialize_project_settings(settings: AssetPlacerSettings):
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	_set_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
+	_set_project_setting(KEY_UPDATER_ENABLED, settings.updater_enabled)
 
 	_set_project_setting_default(KEY_GENERAL_PREVIEW_MATERIAL, settings.DEFAULT_PREVIEW_MATERIAL)
 	_set_project_setting_default(KEY_GENERAL_PLANE_MATERIAL, settings.DEFAULT_PLANE_MATERIAL)
 	_set_project_setting_default(KEY_ASSET_LIBRARY_PATH, settings.DEFAULT_ASSET_LIBRARY_PATH)
+	_set_project_setting_default(KEY_UPDATER_ENABLED, false)
 
 
 func set_settings(settings: AssetPlacerSettings):
@@ -94,6 +97,7 @@ func set_settings(settings: AssetPlacerSettings):
 	_set_project_setting(KEY_GENERAL_PREVIEW_MATERIAL, settings.preview_material_resource)
 	_set_project_setting(KEY_GENERAL_PLANE_MATERIAL, settings.plane_material_resource)
 	_set_project_setting(KEY_ASSET_LIBRARY_PATH, settings.asset_library_path)
+	_set_project_setting(KEY_UPDATER_ENABLED, settings.updater_enabled)
 
 	settings_changed.emit(get_settings())
 
@@ -125,6 +129,9 @@ func get_settings() -> AssetPlacerSettings:
 	)
 	settings.asset_library_path = _get_project_setting(
 		KEY_ASSET_LIBRARY_PATH, settings.asset_library_path
+	)
+	settings.updater_enabled = _get_project_setting(
+		KEY_UPDATER_ENABLED, settings.updater_enabled
 	)
 
 	return settings

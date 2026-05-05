@@ -40,6 +40,7 @@ var binding_negative_transform: APInputOption:
 var preview_material_resource := DEFAULT_PREVIEW_MATERIAL
 var plane_material_resource := DEFAULT_PLANE_MATERIAL
 var asset_library_path := DEFAULT_ASSET_LIBRARY_PATH
+var updater_enabled := false
 
 
 static func default() -> AssetPlacerSettings:
