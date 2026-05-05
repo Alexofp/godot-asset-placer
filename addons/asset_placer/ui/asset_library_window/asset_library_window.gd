@@ -28,12 +28,14 @@ signal asset_selected(asset: AssetResource)
 @onready var scroll_container = %ScrollContainer
 @onready var empty_search_content = %EmptySearchContent
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
-
+@onready var folder_filter_list: ItemList = %FolderFilterList
 
 func _ready():
 	if is_part_of_edited_scene():
 		return
 
+	folder_presenter.folders_loaded.connect(_show_folders)
+	folder_presenter._ready()
 	presenter.assets_loaded.connect(show_assets)
 	presenter.show_filter_info.connect(show_filter_info)
 	placer_presenter.asset_selected.connect(set_selected_asset)
@@ -217,3 +219,26 @@ func show_sync_in_progress(active: bool):
 	else:
 		reload_button.show()
 		progress_bar.hide()
+
+func _show_folders(folders: Array[AssetFolder]):
+	presenter.setActiveFolder(null)
+	folder_filter_list.clear()
+
+	folder_filter_list.add_item("All folders")
+	for folder in folders:
+		folder_filter_list.add_item(folder.path.trim_prefix("res://"))
+		#var instance: FolderView = folder_res.instantiate()
+		#v_box_container.add_child(instance)
+		#instance.set_folder(folder)
+
+func _on_folder_filter_list_item_selected(_index: int) -> void:
+	if(_index <= 0):
+		presenter.setActiveFolder(null)
+		return
+	_index -= 1
+	var lib := AssetLibraryManager.get_asset_library()
+	var allTheFolders := lib.get_folders()
+	if(_index < 0 || _index >= allTheFolders.size()):
+		return
+	presenter.setActiveFolder(allTheFolders[_index])
+	

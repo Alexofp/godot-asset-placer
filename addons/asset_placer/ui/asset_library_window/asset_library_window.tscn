@@ -75,6 +75,18 @@ script = ExtResource("3_gvdec")
 icon_name = &"FolderCreate"
 metadata/_custom_type_script = "uid://dmicn3kmr620j"
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gvdec"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.07846785, 0.07846785, 0.07846785, 0.65000004)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
 [node name="AssetLibraryWindow" type="Control" unique_id=208186929]
 layout_mode = 3
 anchors_preset = 15
@@ -96,7 +108,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 6
-split_offsets = PackedInt32Array(350, -24)
+split_offsets = PackedInt32Array(350, -2)
 split_offset = 350
 
 [node name="PanelContainer" type="PanelContainer" parent="MainContent" unique_id=814115667]
@@ -379,7 +391,18 @@ layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
 
+[node name="FolderFilterList" type="ItemList" parent="MainContent" unique_id=1622118382]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme_override_styles/panel = SubResource("StyleBoxFlat_gvdec")
+item_count = 2
+item_0/text = "Folder 1"
+item_1/text = "Folder 2"
+
 [node name="PanelContainer3" type="FoldableContainer" parent="MainContent" unique_id=94818897]
+visible = false
 layout_mode = 2
 
 [node name="EmptyContent" type="CenterContainer" parent="." unique_id=1062482879]
@@ -423,3 +446,5 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
+
+[connection signal="item_selected" from="MainContent/FolderFilterList" to="." method="_on_folder_filter_list_item_selected"]

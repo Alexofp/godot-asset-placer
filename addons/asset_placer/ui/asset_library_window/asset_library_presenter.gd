@@ -11,6 +11,7 @@ enum EmptyType { Search, Collection, All, None }
 var synchronizer: Synchronize
 var is_sort_ascending := true
 
+var _active_folder: AssetFolder = null
 var _active_collections: Array[AssetCollection] = []
 var _filtered_assets: Array[AssetResource] = []
 var _current_query: String
@@ -106,8 +107,9 @@ func _filter_by_collections_and_query():
 		var belongs_to_collection = (
 			asset.belongs_to_some_collection(_active_collections) || _active_collections.is_empty()
 		)
+		var is_in_folder:bool = (!_active_folder || _active_folder.has_asset(asset))
 
-		if matches_query and belongs_to_collection:
+		if matches_query and belongs_to_collection and is_in_folder:
 			filtered.push_back(asset)
 
 	filtered.sort_custom(AssetSortBy.get_sort_function(_current_sort_method, is_sort_ascending))
@@ -127,3 +129,7 @@ func _filter_by_collections_and_query():
 
 func sync():
 	synchronizer.sync_all()
+
+func setActiveFolder(_folder:AssetFolder):
+	_active_folder = _folder
+	_filter_by_collections_and_query()
