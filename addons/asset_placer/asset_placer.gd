@@ -286,7 +286,7 @@ func _pick_name(node: Node3D, parent: Node3D) -> String:
 	for child in parent.get_children():
 		if child.has_meta(META_ASSET_ID) && child.get_meta(META_ASSET_ID) == asset.id:
 			number_of_same_scenes += 1
-	return node.name if number_of_same_scenes == 0 else node.name + " (%s)" % number_of_same_scenes
+	return node.name if number_of_same_scenes == 0 else node.name + "_%s" % number_of_same_scenes
 
 
 func get_safe_basis(up: Vector3, forward_hint: Vector3) -> Basis:
