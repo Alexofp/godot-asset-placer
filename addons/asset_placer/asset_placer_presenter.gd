@@ -188,6 +188,10 @@ func toggle_axis(axis: Vector3):
 	var new := (preview_transform_axis - axis).abs()
 	_select_axis(new)
 
+func select_axis(axis: Vector3):
+	if(axis == preview_transform_axis):
+		axis = Vector3(1.0, 1.0, 1.0)
+	_select_axis(axis)
 
 func _select_axis(axis: Vector3):
 	if axis == Vector3.ZERO:

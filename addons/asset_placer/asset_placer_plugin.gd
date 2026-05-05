@@ -321,13 +321,16 @@ func _forward_3d_gui_input(viewport_camera, event):
 		return _handled()
 	
 	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisX].is_pressed(event):
-		_presenter.toggle_axis(Vector3.RIGHT)
+		_presenter.select_axis(Vector3.RIGHT)
+		#_presenter.toggle_axis(Vector3.RIGHT)
 		return _handled()
 	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisY].is_pressed(event):
-		_presenter.toggle_axis(Vector3.UP)
+		_presenter.select_axis(Vector3.UP)
+		#_presenter.toggle_axis(Vector3.UP)
 		return _handled()
 	if current_settings.bindings[AssetPlacerSettings.Bindings.ToggleAxisZ].is_pressed(event):
-		_presenter.toggle_axis(Vector3.BACK)
+		_presenter.select_axis(Vector3.BACK)
+		#_presenter.toggle_axis(Vector3.BACK)
 		return _handled()
 
 	if current_settings.bindings[AssetPlacerSettings.Bindings.TogglePlaneMode].is_pressed(event):
