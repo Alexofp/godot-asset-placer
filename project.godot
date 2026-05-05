@@ -19,6 +19,10 @@ run/main_scene="uid://3qun24bndqll"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
+[asset_placer]
+
+general/default_folders=PackedStringArray("res://demo/assets/", "res://demo/assets/subfolder/")
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/asset_placer/plugin.cfg")

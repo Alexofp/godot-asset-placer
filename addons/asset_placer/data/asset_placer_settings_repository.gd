@@ -74,6 +74,10 @@ func initialize_project_settings(settings: AssetPlacerSettings):
 	_set_project_setting_default(KEY_GENERAL_PLANE_MATERIAL, settings.DEFAULT_PLANE_MATERIAL)
 	_set_project_setting_default(KEY_ASSET_LIBRARY_PATH, settings.DEFAULT_ASSET_LIBRARY_PATH)
 	_set_project_setting_default(KEY_UPDATER_ENABLED, false)
+	
+	if(!ProjectSettings.has_setting("asset_placer/general/default_folders")):
+		ProjectSettings.set_setting("asset_placer/general/default_folders", PackedStringArray())
+	ProjectSettings.set_initial_value("asset_placer/general/default_folders", PackedStringArray())
 
 
 func set_settings(settings: AssetPlacerSettings):

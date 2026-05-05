@@ -26,6 +26,11 @@ var _is_signal_queued: bool:
 func _init(
 	assets: Array[AssetResource], folders: Array[AssetFolder], collections: Array[AssetCollection]
 ):
+	if(folders.is_empty()):
+		var theDefaultFolders:PackedStringArray = ProjectSettings.get_setting("asset_placer/general/default_folders", PackedStringArray())
+		for theFolder in theDefaultFolders:
+			var newAssetFolder:AssetFolder = AssetFolder.new(theFolder, false)
+			folders.append(newAssetFolder)
 	_assets = assets
 	_folders = folders
 	_collections = collections
