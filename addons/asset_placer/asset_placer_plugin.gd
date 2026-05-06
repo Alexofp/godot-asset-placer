@@ -352,12 +352,32 @@ func _forward_3d_gui_input(viewport_camera, event):
 			# Don't handle RMB, let it pass through
 			pass
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if(Input.is_key_pressed(KEY_ALT)):
+				try_set_plane_from_mouse(event.position, viewport_camera)
+				return _handled()
 			var handled = _asset_placer.place_asset(Input.is_key_pressed(KEY_SHIFT))
 			if handled:
 				return _handled()
 
 	return EditorPlugin.AFTER_GUI_INPUT_PASS
 
+func try_set_plane_from_mouse(mouse_position:Vector2, camera:Camera3D):
+	var ray_origin = camera.project_ray_origin(mouse_position)
+	var ray_dir = camera.project_ray_normal(mouse_position)
+	var space_state = camera.get_world_3d().direct_space_state
+
+	var params = PhysicsRayQueryParameters3D.new()
+	params.from = ray_origin
+	params.exclude = _asset_placer.preview_rids
+	params.to = ray_origin + ray_dir * 1000
+	var result = space_state.intersect_ray(params)
+	if not result.has("position") or not result.has("normal"):
+		return
+
+	var position: Vector3 = result.position
+	var normal: Vector3 = result.normal
+	
+	_presenter.set_plane_origin(_asset_placer._snap_position_no_normal(position))
 
 func _show_plugin_up_to_date():
 	if ClassDB.class_exists(&"EditorDock"):

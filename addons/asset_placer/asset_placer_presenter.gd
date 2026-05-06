@@ -366,3 +366,7 @@ func move_plane_up(direction: int):
 
 		plane_options.origin = new_origin
 		placement_mode = GapPlacementMode.PlanePlacement.new(plane_options)
+
+func set_plane_origin(new_origin:Vector3):
+	_last_plane_options.origin = new_origin
+	placement_mode = GapPlacementMode.PlanePlacement.new(_last_plane_options)

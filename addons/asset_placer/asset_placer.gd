@@ -183,6 +183,12 @@ func _snap_position(hit_pos: Vector3, normal: Vector3) -> Vector3:
 
 	return snapped
 
+func _snap_position_no_normal(hit_pos: Vector3) -> Vector3:
+	if !_presenter.options.snapping_enabled:
+		return hit_pos
+	var grid_step: float = _presenter.options.snapping_grid_step
+	return round(hit_pos / grid_step) * grid_step
+
 
 func _place_instance(transform: Transform3D, select_after_placement: bool):
 	var scene := EditorInterface.get_edited_scene_root()
