@@ -448,4 +448,5 @@ layout_mode = 2
 text = "Add Folders  Using Dialog"
 icon = SubResource("Texture2D_mdpb8")
 
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
 [connection signal="item_selected" from="MainContent/FolderFilterList" to="." method="_on_folder_filter_list_item_selected"]

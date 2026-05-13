@@ -31,7 +31,18 @@ var assetPreviewPool:Array[AssetResourcePreview] = []
 @onready var empty_view_add_folder_btn = %EmptyViewAddFolderBtn
 @onready var folder_filter_list: ItemList = %FolderFilterList
 
+var readyToStart:bool = false
+var didStart:bool = false
+
+func _on_visibility_changed() -> void:
+	if(readyToStart && !didStart && is_visible_in_tree()):
+		didStart = true
+		readyActually()
+
 func _ready():
+	readyToStart = true
+
+func readyActually():
 	if is_part_of_edited_scene():
 		return
 
