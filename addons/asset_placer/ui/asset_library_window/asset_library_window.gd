@@ -12,6 +12,7 @@ signal asset_selected(asset: AssetResource)
 @onready var preview_resource = preload(
 	"res://addons/asset_placer/ui/components/asset_resource_preview.tscn"
 )
+var assetPreviewPool:Array[AssetResourcePreview] = []
 @onready var add_folder_button: Button = %AddFolderButton
 @onready var search_field: LineEdit = %SearchField
 @onready var filter_button: Button = %FilterButton
@@ -64,27 +65,46 @@ func _ready():
 			)
 	)
 
+func putAssetPreviewIntoPool(_preview:AssetResourcePreview):
+	# Remove signals
+	_preview.left_clicked.disconnect(onAssetLeftClick)
+	_preview.right_clicked.disconnect(onAssetRightClick.bind(_preview))
+	# Remove from parent
+	_preview.get_parent().remove_child(_preview)
+	# Put into pool
+	assetPreviewPool.append(_preview)
 
 func show_assets(assets: Array[AssetResource]):
 	placer_presenter.current_assets = assets
 	empty_collection_content.hide()
 	scroll_container.show()
-	for child in grid_container.get_children():
-		child.queue_free()
+	# Save way of putting nodes into the pool
+	var gridChildAm:int = grid_container.get_child_count()
+	for _i in gridChildAm:
+		var _indx:int = gridChildAm - _i - 1
+		var theNode:Node = grid_container.get_child(_indx)
+		if(theNode is AssetResourcePreview):
+			putAssetPreviewIntoPool(theNode)
+		else:
+			theNode.queue_free()
+	#for child in grid_container.get_children():
+	#	child.queue_free()
 	for asset in assets:
-		var child: AssetResourcePreview = preview_resource.instantiate()
-		child.left_clicked.connect(
-			func(asset: AssetResource):
-				if is_instance_valid(asset.get_resource()):
-					placer_presenter.toggle_asset(asset)
-				else:
-					push_error("Invalid asset")
-		)
-		child.right_clicked.connect(func(asset): show_asset_menu(asset, child))
+		var child: AssetResourcePreview = preview_resource.instantiate() if assetPreviewPool.is_empty() else assetPreviewPool.pop_back()
+		child.left_clicked.connect(onAssetLeftClick)
+		child.right_clicked.connect(onAssetRightClick.bind(child))
 		child.set_meta("id", asset.id)
 		grid_container.add_child(child)
 		child.set_asset(asset)
 
+func onAssetLeftClick(_asset:AssetResource):
+	if is_instance_valid(_asset.get_resource()):
+		placer_presenter.toggle_asset(_asset)
+	else:
+		push_error("Invalid asset")
+
+func onAssetRightClick(_asset:AssetResource, _child:AssetResourcePreview):
+	show_asset_menu(_asset, _child)
 
 func show_asset_menu(asset: AssetResource, _control: Control):
 	var options_menu := PopupMenu.new()
