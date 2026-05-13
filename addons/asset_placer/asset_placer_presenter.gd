@@ -282,6 +282,7 @@ func set_max_rotation(vector: Vector3):
 func cancel():
 	if transform_mode != TransformMode.None:
 		toggle_transformation_mode(TransformMode.None)
+		clear_selection()
 	elif _selected_node != null:
 		end_node_transform_mode()
 	else:
@@ -303,12 +304,16 @@ func toggle_asset(asset: AssetResource):
 		_selected_asset = asset
 		asset_selected.emit(asset)
 		placer_active.emit(true)
+		if transform_mode == TransformMode.None:
+			toggle_transformation_mode(TransformMode.Rotate)
 
 
 func select_asset(asset: AssetResource):
 	_selected_asset = asset
 	asset_selected.emit(asset)
 	placer_active.emit(true)
+	if transform_mode == TransformMode.None:
+		toggle_transformation_mode(TransformMode.Rotate)
 
 
 func start_node_transform_mode(node: Node3D):
