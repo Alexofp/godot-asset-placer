@@ -16,7 +16,8 @@ static func get_node_aabb(node: Node, exclude_top_level_transform: bool = true) 
 
 	# Get the aabb of the visual instance
 	if node is GeometryInstance3D:
-		bounds = node.get_aabb()
+		if(node.visible && !node.get_meta("IGNORE_THUMBNAIL", false)):
+			bounds = node.get_aabb()
 
 	# Recurse through all children
 	for child in node.get_children():
@@ -26,7 +27,8 @@ static func get_node_aabb(node: Node, exclude_top_level_transform: bool = true) 
 		else:
 			bounds = bounds.merge(child_bounds)
 
-	if !exclude_top_level_transform:
-		bounds = node.transform * bounds
+	if !exclude_top_level_transform && (node is GeometryInstance3D):
+		if(node.visible && !node.get_meta("IGNORE_THUMBNAIL", false)):
+			bounds = node.transform * bounds
 
 	return bounds
