@@ -257,7 +257,8 @@ func _show_folders(folders: Array[AssetFolder]):
 
 	folder_filter_list.add_item("All folders")
 	for folder in folders:
-		folder_filter_list.add_item(folder.path.trim_prefix("res://"))
+		var theFolderSplit := folder.path.split("/", false)
+		folder_filter_list.add_item(theFolderSplit[theFolderSplit.size()-1] if !theFolderSplit.is_empty() else "Empty name")
 		#var instance: FolderView = folder_res.instantiate()
 		#v_box_container.add_child(instance)
 		#instance.set_folder(folder)
