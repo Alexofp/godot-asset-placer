@@ -95,6 +95,7 @@ func _enter_tree():
 		load("res://addons/asset_placer/ui/viewport_overlay/viewport_overlay.tscn").instantiate()
 	)
 	get_editor_interface().get_editor_viewport_3d().add_child(overlay)
+	overlay._asset_placer = _asset_placer
 
 	_file_system.resources_reimported.connect(_react_to_reimorted_files)
 	if !_file_system.is_scanning():

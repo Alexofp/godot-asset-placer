@@ -27,8 +27,10 @@ var _last_palette_assets: Array[AssetResource] = []
 )
 @onready var _settings_repository := AssetPlacerSettingsRepository.instance
 
+var _asset_placer: AssetPlacer
 
 func _ready():
+	set_process(false)
 	hide()
 	_error_position = error_container.position
 	show_settings(_settings_repository.get_settings())
@@ -140,3 +142,18 @@ func set_axis(vector: Vector3):
 
 func _set_overlay_visible(visible: bool):
 	self.visible = visible
+	set_process(visible)
+
+@onready var pos_label: Label = %PosLabel
+@onready var ang_label: Label = %AngLabel
+@onready var scale_label: Label = %ScaleLabel
+
+func _process(_delta: float) -> void:
+	if(!_asset_placer):
+		return
+	var theNode := _asset_placer.preview_node
+	if(!theNode):
+		return
+	pos_label.text = "Pos "+str(round(theNode.global_position*100.0)/100.0)
+	ang_label.text = "Ang "+str(round(theNode.global_rotation_degrees*100.0)/100.0)
+	scale_label.text = "Scale "+str(round(theNode.scale*100.0)/100.0)

@@ -55,7 +55,7 @@ metadata/_custom_type_script = "uid://dmicn3kmr620j"
 content_margin_left = 24.0
 content_margin_top = 16.0
 content_margin_right = 24.0
-content_margin_bottom = 24.0
+content_margin_bottom = 6.0
 bg_color = Color(0.17254902, 0.17254902, 0.17254902, 0.6)
 corner_radius_top_left = 16
 corner_radius_top_right = 16
@@ -162,9 +162,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.745
 anchor_bottom = 0.745
-offset_left = -1306.0
+offset_left = -2.0
 offset_top = -27.5
-offset_right = -1046.0
+offset_right = 258.0
 offset_bottom = 27.5
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_luwev")
@@ -205,6 +205,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_h3uaa")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel" unique_id=608962691]
 layout_mode = 2
+theme_override_constants/separation = -8
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=596689943]
 layout_mode = 2
@@ -258,6 +259,34 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.85490197, 0.047058824, 1)
 theme_override_font_sizes/font_size = 20
 text = "Z"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer" unique_id=9779009]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PosLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer3" unique_id=906961523]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Pos (0, 1, 2)"
+horizontal_alignment = 1
+
+[node name="AngLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer3" unique_id=2055496179]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Ang (0, 0, 0)"
+horizontal_alignment = 1
+
+[node name="ScaleLabel" type="Label" parent="Panel/VBoxContainer/HBoxContainer3" unique_id=1752153841]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "Scale (1, 1, 1)"
+horizontal_alignment = 1
 
 [node name="AssetPallete" type="PanelContainer" parent="." unique_id=936951251]
 unique_name_in_owner = true
